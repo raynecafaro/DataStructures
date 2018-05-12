@@ -5,44 +5,82 @@ class LinkedList:
         self.head = head
 
     def lprint(self):
-        node = self.head
-        while node:
-            print(node.data)
-            node = node.next
+        curr = self.head
+        while curr:
+            print(curr.data)
+            curr = curr.next
 
     def insert_head(self, data=None):
         second = None
         if self.head is not None:
             second = self.head
         
-        NewNode = Node(data)
-        self.head = NewNode
+        self.head = Node(data)
 
         if second:
             self.head.next = second
 
     def append(self, data=None):
-        pass 
+        if self.head is None:
+            self.insert_head(data) 
+            return
         
+        curr = self.head
+        while curr.next:
+            curr = curr.next
+        
+        curr.next = Node(data)
+
+class DoubleLinkedList:
+    def __init__(self, head = None):
+        self.head = head
+
+    def lprint(self):
+        curr = self.head
+        while curr:
+            print(node.data)
+            curr = curr.next
+
+    def insert_head(self, data=None):
+        second = None
+        if self.head is not None:
+            second = self.head
+        
+        self.head = Node(data)
+
+        if second:
+            self.head.next = second
+            second.prev = self.head
+
+    def append(self, data=None):
+        if self.head is None:
+            self.insert_head(data) 
+            return
+        
+        curr = self.head
+        while curr.next:
+            curr = curr.next
+        
+        curr.next = Node(data)
+        curr.next.prev = curr
+
 def single_test():
     Lst = LinkedList()
-    Lst.head = Node("Beginning")
-
-    # Create the Nodes
-    # node2 = Node("Second")
-    # node3 = Node("Third")
-    # node4 = Node("Fourth")
-    # node5 = Node("Last")
-
-    # Link the Nodes
-    #Lst.head.next = node2
-    #node2.next = node3
-    #node3.next = node4
-    #node4.next = node5
-
+    
+    # Test insert_head()
+    Lst.head = Node("First Node")
     Lst.lprint()
-    Lst.insert_head("New Beginning")
+    Lst.insert_head("Better First Node")
     Lst.lprint()
+
+    # Test append()
+    Lst.append('Appended Element')
+    Lst.lprint()
+
+    # Test append() on fresh list
+    NewList = LinkedList()
+    NewList.append("Hello")
+    NewList.lprint()
 
 def double_test():
     pass
